@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
+
+<suite name="CRUDE suite"  >
+
+    <test name="Chrome test">
+        <classes>
+            <class name="CRUDTest">
+            </class>
+        </classes>
+    </test>
+
+</suite>
