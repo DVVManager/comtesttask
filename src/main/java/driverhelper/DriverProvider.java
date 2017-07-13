@@ -21,8 +21,6 @@ import java.util.concurrent.TimeUnit;
 @org.springframework.context.annotation.Configuration
 public class DriverProvider {
 
-
-   // private static DriverProvider instance = null;
     private WebDriver webDriver = null;
     private long testTimeoutMilliSeconds;
 
@@ -73,7 +71,7 @@ public class DriverProvider {
 
     private void setUpSelenide() {
         WebDriverRunner.setWebDriver(webDriver);
-        Configuration.screenshots = true;
+        Configuration.screenshots = false;
         Configuration.timeout = testTimeoutMilliSeconds;
         Configuration.collectionsTimeout = testTimeoutMilliSeconds;
         Configuration.pageLoadStrategy = System.getProperty("selenide.pageloadstrategy");

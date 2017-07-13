@@ -1,3 +1,4 @@
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import ru.yandex.qatools.allure.annotations.*;
@@ -6,6 +7,7 @@ import ru.yandex.qatools.allure.model.SeverityLevel;
 /**
  * Created by Administrator on 7/11/2017.
  */
+@Listeners({ TestBase.class })
 public class CRUDTest extends TestBase {
 
     HomePage homePage;
@@ -44,7 +46,7 @@ public class CRUDTest extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     @Test(priority = 2)
     public void deleteTask(){
-        homePage.deleteTask(newTaskName);
+        homePage.deleteTask(newTaskName+1);
     }
 
 }

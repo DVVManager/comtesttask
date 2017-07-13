@@ -1,6 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
 
 <suite name="CRUDE suite"  >
+    <listeners>
+        <listener class-name="TestBase" />
+    </listeners>
 
     <test name="Chrome test">
         <classes>

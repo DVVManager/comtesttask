@@ -54,12 +54,14 @@ public class TestBase extends AbstractTestNGSpringContextTests  implements ITest
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        logger.warn("| Test Failed |");
+
         try {
             screenshot();
         } catch (IOException e) {
             e.printStackTrace();
+            logger.warn("| Test fail was mot captured |");
         }
+        logger.warn("| Test Failed |");
     }
 
     @Override
