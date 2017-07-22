@@ -18,14 +18,22 @@ import java.util.concurrent.TimeUnit;
  * Created by Administrator on 7/11/2017.
  */
 
-@org.springframework.context.annotation.Configuration
 public class DriverProvider {
 
     private WebDriver webDriver = null;
     private long testTimeoutMilliSeconds;
+    private static DriverProvider provider=new DriverProvider();
 
-    @Bean
-    public WebDriver getWebDriver() {
+    private DriverProvider(){
+
+    }
+
+    public static DriverProvider getProvider(){
+        return provider;
+    }
+
+
+    public WebDriver initWebDriver() {
 
         testTimeoutMilliSeconds = Long.parseLong(System.getProperty("test.timeout.milliseconds"));
 
@@ -35,7 +43,7 @@ public class DriverProvider {
             if(browserType == null) {
                 browserType = "firefox";
             }
-            createWebDriver(browserType);
+            webDriver=createWebDriver(browserType);
             webDriver.manage().timeouts().pageLoadTimeout(testTimeoutMilliSeconds, TimeUnit.MILLISECONDS);
             webDriver.manage().timeouts().setScriptTimeout(testTimeoutMilliSeconds, TimeUnit.MILLISECONDS);
             webDriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
@@ -44,28 +52,28 @@ public class DriverProvider {
         return webDriver;
     }
 
-    private void createWebDriver(String browserType) {
+    private WebDriver createWebDriver(String browserType) {
 
         if(browserType.equalsIgnoreCase("firefox")) {
             FirefoxDriverManager.getInstance().setup();
             DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-            webDriver =  new FirefoxDriver(capabilities);
+            return new FirefoxDriver(capabilities);
         }
         else if(browserType.equalsIgnoreCase("chrome")) {
             ChromeDriverManager.getInstance().setup();
             DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-            webDriver = new ChromeDriver(capabilities);
+            return new ChromeDriver(capabilities);
         }
 
         else if(browserType.equalsIgnoreCase("ie")) {
             InternetExplorerDriverManager.getInstance().setup();
             DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-            webDriver = new InternetExplorerDriver(capabilities);
+            return new InternetExplorerDriver(capabilities);
         }
         else {
             // if we get a browserType which we do not recognize, default to firefox
             DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-            webDriver = new FirefoxDriver(capabilities);
+            return new FirefoxDriver(capabilities);
         }
     }
 

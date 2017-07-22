@@ -1,5 +1,6 @@
 import com.codeborne.selenide.Screenshots;
 import com.google.common.io.Files;
+import driverhelper.DriverProvider;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -77,6 +78,7 @@ public class TestBase extends AbstractTestNGSpringContextTests  implements ITest
     @Override
     public void onStart(ITestContext iTestContext) {
         logger.info(" Started :");
+        DriverProvider.getProvider().initWebDriver();
     }
 
     @Override
